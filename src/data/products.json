@@ -1,0 +1,368 @@
+[
+  {
+    "id": "prod-001",
+    "slug_sr": "led-sijalica-e27-10w",
+    "slug_en": "led-bulb-e27-10w",
+    "sku": "LED-E27-10W",
+    "category": "led-lighting",
+    "name_sr": "LED Sijalica E27 10W",
+    "name_en": "LED Bulb E27 10W",
+    "description_sr": "Energetski efikasna LED sijalica sa E27 grlom i snagom od 10W. Idealna za opštu rasvetu u domu ili kancelariji. Dugotrajnost do 25.000 sati rada.",
+    "description_en": "Energy-efficient LED bulb with E27 socket and 10W power. Ideal for general lighting in home or office. Lifespan up to 25,000 hours.",
+    "short_description_sr": "10W LED sijalica sa E27 grlom, topla bela svetlost",
+    "short_description_en": "10W LED bulb with E27 socket, warm white light",
+    "price": 450,
+    "currency": "RSD",
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1550985616-10810253b84d?w=800&q=80",
+        "alt_sr": "LED sijalica E27 10W",
+        "alt_en": "LED bulb E27 10W",
+        "isPrimary": true
+      }
+    ],
+    "specifications": [
+      {
+        "key_sr": "Snaga",
+        "key_en": "Power",
+        "value_sr": "10W",
+        "value_en": "10W"
+      },
+      {
+        "key_sr": "Napon",
+        "key_en": "Voltage",
+        "value_sr": "220-240V AC",
+        "value_en": "220-240V AC"
+      },
+      {
+        "key_sr": "Temperatura boje",
+        "key_en": "Color Temperature",
+        "value_sr": "3000K (topla bela)",
+        "value_en": "3000K (warm white)"
+      },
+      {
+        "key_sr": "Svetlosni fluks",
+        "key_en": "Luminous Flux",
+        "value_sr": "800 lm",
+        "value_en": "800 lm"
+      },
+      {
+        "key_sr": "Životni vek",
+        "key_en": "Lifespan",
+        "value_sr": "25.000 sati",
+        "value_en": "25,000 hours"
+      }
+    ],
+    "inStock": true,
+    "featured": true,
+    "keywords_sr": ["led", "sijalica", "energetska efikasnost", "e27", "rasveta"],
+    "keywords_en": ["led", "bulb", "energy efficient", "e27", "lighting"],
+    "meta_description_sr": "Kupite LED sijalicu E27 10W - energetski efikasno osvetljenje za vaš dom. Dugotrajnost 25.000 sati.",
+    "meta_description_en": "Buy LED Bulb E27 10W - energy-efficient lighting for your home. Lifespan 25,000 hours."
+  },
+  {
+    "id": "prod-002",
+    "slug_sr": "prekidac-jednopolni-beli",
+    "slug_en": "single-pole-switch-white",
+    "sku": "SW-1P-WHT",
+    "category": "switches-sockets",
+    "name_sr": "Prekidač Jednopolni Beli",
+    "name_en": "Single Pole Switch White",
+    "description_sr": "Kvalitetan jednopolni prekidač u beloj boji. Moderan dizajn koji se uklapa u svaki enterijer. Jednostavna montaža i pouzdana funkcionalnost.",
+    "description_en": "Quality single pole switch in white color. Modern design that fits any interior. Easy installation and reliable functionality.",
+    "short_description_sr": "Jednopolni prekidač, bela boja, moderan dizajn",
+    "short_description_en": "Single pole switch, white color, modern design",
+    "price": 280,
+    "currency": "RSD",
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=800&q=80",
+        "alt_sr": "Beli jednopolni prekidač",
+        "alt_en": "White single pole switch",
+        "isPrimary": true
+      }
+    ],
+    "specifications": [
+      {
+        "key_sr": "Tip",
+        "key_en": "Type",
+        "value_sr": "Jednopolni",
+        "value_en": "Single Pole"
+      },
+      {
+        "key_sr": "Napon",
+        "key_en": "Voltage",
+        "value_sr": "250V",
+        "value_en": "250V"
+      },
+      {
+        "key_sr": "Struja",
+        "key_en": "Current",
+        "value_sr": "10A",
+        "value_en": "10A"
+      },
+      {
+        "key_sr": "Boja",
+        "key_en": "Color",
+        "value_sr": "Bela",
+        "value_en": "White"
+      }
+    ],
+    "inStock": true,
+    "featured": false,
+    "keywords_sr": ["prekidač", "jednopolni", "beli", "električna instalacija"],
+    "keywords_en": ["switch", "single pole", "white", "electrical installation"],
+    "meta_description_sr": "Kvalitetan beli jednopolni prekidač za vašu električnu instalaciju. Moderan dizajn i pouzdana funkcionalnost.",
+    "meta_description_en": "Quality white single pole switch for your electrical installation. Modern design and reliable functionality."
+  },
+  {
+    "id": "prod-003",
+    "slug_sr": "kabl-nyy-3x2-5",
+    "slug_en": "cable-nyy-3x2-5",
+    "sku": "CBL-NYY-3X2.5",
+    "category": "cables-wires",
+    "name_sr": "Kabl NYY 3x2.5mm²",
+    "name_en": "Cable NYY 3x2.5mm²",
+    "description_sr": "Energetski kabl NYY sa tri provodnika preseka 2.5mm². Pogodan za spoljnu i unutrašnju upotrebu. Visok kvalitet izolacije i dugotrajnost.",
+    "description_en": "Power cable NYY with three conductors of 2.5mm² cross-section. Suitable for outdoor and indoor use. High quality insulation and durability.",
+    "short_description_sr": "Energetski kabl 3x2.5mm², za spoljnu i unutrašnju upotrebu",
+    "short_description_en": "Power cable 3x2.5mm², for outdoor and indoor use",
+    "price": 180,
+    "currency": "RSD",
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&q=80",
+        "alt_sr": "Kabl NYY 3x2.5mm²",
+        "alt_en": "Cable NYY 3x2.5mm²",
+        "isPrimary": true
+      }
+    ],
+    "specifications": [
+      {
+        "key_sr": "Tip",
+        "key_en": "Type",
+        "value_sr": "NYY",
+        "value_en": "NYY"
+      },
+      {
+        "key_sr": "Broj provodnika",
+        "key_en": "Number of Conductors",
+        "value_sr": "3",
+        "value_en": "3"
+      },
+      {
+        "key_sr": "Presek",
+        "key_en": "Cross-section",
+        "value_sr": "2.5mm²",
+        "value_en": "2.5mm²"
+      },
+      {
+        "key_sr": "Napon",
+        "key_en": "Voltage",
+        "value_sr": "0.6/1kV",
+        "value_en": "0.6/1kV"
+      },
+      {
+        "key_sr": "Jedinica mere",
+        "key_en": "Unit",
+        "value_sr": "Metar",
+        "value_en": "Meter"
+      }
+    ],
+    "inStock": true,
+    "featured": true,
+    "keywords_sr": ["kabl", "nyy", "provodnik", "energetski kabl"],
+    "keywords_en": ["cable", "nyy", "conductor", "power cable"],
+    "meta_description_sr": "Energetski kabl NYY 3x2.5mm² za spoljnu i unutrašnju upotrebu. Visok kvalitet i dugotrajnost.",
+    "meta_description_en": "Power cable NYY 3x2.5mm² for outdoor and indoor use. High quality and durability."
+  },
+  {
+    "id": "prod-004",
+    "slug_sr": "razvodna-tabla-12-modula",
+    "slug_en": "distribution-board-12-modules",
+    "sku": "DB-12M",
+    "category": "distribution-boards",
+    "name_sr": "Razvodna Tabla 12 Modula",
+    "name_en": "Distribution Board 12 Modules",
+    "description_sr": "Razvodna tabla za 12 modula sa transparentnim vratima. Izrađena od visokokvalitetnog plastičnog materijala. Idealna za stambene i komercijalne objekte.",
+    "description_en": "Distribution board for 12 modules with transparent door. Made of high-quality plastic material. Ideal for residential and commercial buildings.",
+    "short_description_sr": "Razvodna tabla za 12 modula, transparentna vrata",
+    "short_description_en": "Distribution board for 12 modules, transparent door",
+    "price": 1250,
+    "currency": "RSD",
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&q=80",
+        "alt_sr": "Razvodna tabla 12 modula",
+        "alt_en": "Distribution board 12 modules",
+        "isPrimary": true
+      }
+    ],
+    "specifications": [
+      {
+        "key_sr": "Broj modula",
+        "key_en": "Number of Modules",
+        "value_sr": "12",
+        "value_en": "12"
+      },
+      {
+        "key_sr": "Tip montaže",
+        "key_en": "Mounting Type",
+        "value_sr": "Ugradna",
+        "value_en": "Flush-mounted"
+      },
+      {
+        "key_sr": "Materijal",
+        "key_en": "Material",
+        "value_sr": "Plastika",
+        "value_en": "Plastic"
+      },
+      {
+        "key_sr": "Vrata",
+        "key_en": "Door",
+        "value_sr": "Transparentna",
+        "value_en": "Transparent"
+      },
+      {
+        "key_sr": "Stepen zaštite",
+        "key_en": "Protection Degree",
+        "value_sr": "IP40",
+        "value_en": "IP40"
+      }
+    ],
+    "inStock": true,
+    "featured": false,
+    "keywords_sr": ["razvodna tabla", "elektro orman", "12 modula", "distribucija"],
+    "keywords_en": ["distribution board", "electrical cabinet", "12 modules", "distribution"],
+    "meta_description_sr": "Razvodna tabla za 12 modula sa transparentnim vratima. Kvalitetna izrada za stambene i komercijalne objekte.",
+    "meta_description_en": "Distribution board for 12 modules with transparent door. Quality construction for residential and commercial buildings."
+  },
+  {
+    "id": "prod-005",
+    "slug_sr": "fotocela-sumracni-prekidac",
+    "slug_en": "photocell-twilight-switch",
+    "sku": "AUTO-PC-TW",
+    "category": "automation",
+    "name_sr": "Fotoćelija Šumračni Prekidač",
+    "name_en": "Photocell Twilight Switch",
+    "description_sr": "Automatski šumračni prekidač sa fotoćelijom. Automatski uključuje rasvetu pri padu mraka i isključuje pri osvitanju. Podesiva osetljivost.",
+    "description_en": "Automatic twilight switch with photocell. Automatically turns on lighting at dusk and turns off at dawn. Adjustable sensitivity.",
+    "short_description_sr": "Automatski šumračni prekidač, podesiva osetljivost",
+    "short_description_en": "Automatic twilight switch, adjustable sensitivity",
+    "price": 890,
+    "currency": "RSD",
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+        "alt_sr": "Fotoćelija šumračni prekidač",
+        "alt_en": "Photocell twilight switch",
+        "isPrimary": true
+      }
+    ],
+    "specifications": [
+      {
+        "key_sr": "Napon",
+        "key_en": "Voltage",
+        "value_sr": "230V AC",
+        "value_en": "230V AC"
+      },
+      {
+        "key_sr": "Maksimalno opterećenje",
+        "key_en": "Maximum Load",
+        "value_sr": "2000W",
+        "value_en": "2000W"
+      },
+      {
+        "key_sr": "Osetljivost",
+        "key_en": "Sensitivity",
+        "value_sr": "Podesiva 2-100 lux",
+        "value_en": "Adjustable 2-100 lux"
+      },
+      {
+        "key_sr": "Stepen zaštite",
+        "key_en": "Protection Degree",
+        "value_sr": "IP44",
+        "value_en": "IP44"
+      },
+      {
+        "key_sr": "Temperatura rada",
+        "key_en": "Operating Temperature",
+        "value_sr": "-25°C do +50°C",
+        "value_en": "-25°C to +50°C"
+      }
+    ],
+    "inStock": true,
+    "featured": true,
+    "keywords_sr": ["fotoćelija", "šumračni prekidač", "automatika", "senzor svetlosti"],
+    "keywords_en": ["photocell", "twilight switch", "automation", "light sensor"],
+    "meta_description_sr": "Automatski šumračni prekidač sa fotoćelijom. Podesiva osetljivost, automatsko uključivanje rasvete.",
+    "meta_description_en": "Automatic twilight switch with photocell. Adjustable sensitivity, automatic lighting control."
+  },
+  {
+    "id": "prod-006",
+    "slug_sr": "led-panel-60x60-40w",
+    "slug_en": "led-panel-60x60-40w",
+    "sku": "LED-PNL-6060-40W",
+    "category": "led-lighting",
+    "name_sr": "LED Panel 60x60cm 40W",
+    "name_en": "LED Panel 60x60cm 40W",
+    "description_sr": "Visokokvalitetan LED panel dimenzija 60x60cm sa snagom od 40W. Ravnomerna raspodela svetlosti, idealan za kancelarije, škole i zdravstvene ustanove.",
+    "description_en": "High-quality LED panel 60x60cm with 40W power. Even light distribution, ideal for offices, schools and healthcare facilities.",
+    "short_description_sr": "LED panel 60x60cm, 40W, ravnomerna svetlost",
+    "short_description_en": "LED panel 60x60cm, 40W, even light distribution",
+    "price": 3200,
+    "currency": "RSD",
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=800&q=80",
+        "alt_sr": "LED panel 60x60cm 40W",
+        "alt_en": "LED panel 60x60cm 40W",
+        "isPrimary": true
+      }
+    ],
+    "specifications": [
+      {
+        "key_sr": "Dimenzije",
+        "key_en": "Dimensions",
+        "value_sr": "60x60cm",
+        "value_en": "60x60cm"
+      },
+      {
+        "key_sr": "Snaga",
+        "key_en": "Power",
+        "value_sr": "40W",
+        "value_en": "40W"
+      },
+      {
+        "key_sr": "Svetlosni fluks",
+        "key_en": "Luminous Flux",
+        "value_sr": "4000 lm",
+        "value_en": "4000 lm"
+      },
+      {
+        "key_sr": "Temperatura boje",
+        "key_en": "Color Temperature",
+        "value_sr": "4000K (neutralna bela)",
+        "value_en": "4000K (neutral white)"
+      },
+      {
+        "key_sr": "Ugao osvetljenja",
+        "key_en": "Beam Angle",
+        "value_sr": "120°",
+        "value_en": "120°"
+      },
+      {
+        "key_sr": "Životni vek",
+        "key_en": "Lifespan",
+        "value_sr": "50.000 sati",
+        "value_en": "50,000 hours"
+      }
+    ],
+    "inStock": true,
+    "featured": true,
+    "keywords_sr": ["led panel", "rasveta", "kancelarijska rasveta", "60x60"],
+    "keywords_en": ["led panel", "lighting", "office lighting", "60x60"],
+    "meta_description_sr": "LED panel 60x60cm 40W za profesionalnu rasvetu. Ravnomerna svetlost, dugotrajnost 50.000 sati.",
+    "meta_description_en": "LED panel 60x60cm 40W for professional lighting. Even light distribution, lifespan 50,000 hours."
+  }
+]

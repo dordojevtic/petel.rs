@@ -1,0 +1,229 @@
+---
+import type { Product } from '../../types/product';
+import type { Locale } from '../../types/i18n';
+import { getLocalizedField, getLocalizedUrl } from '../../i18n/utils';
+import { useTranslations } from '../../i18n/config';
+
+interface Props {
+  product: Product;
+  locale: Locale;
+}
+
+const { product, locale } = Astro.props;
+const t = useTranslations(locale);
+
+const name = getLocalizedField(product, 'name', locale);
+const shortDesc = getLocalizedField(product, 'short_description', locale);
+const slug = locale === 'sr' ? product.slug_sr : product.slug_en;
+const primaryImage = product.images.find(img => img.isPrimary) || product.images[0];
+const imageAlt = locale === 'sr' ? primaryImage?.alt_sr : primaryImage?.alt_en;
+
+const productPath = locale === 'sr' 
+  ? `proizvodi/${slug}` 
+  : `products/${slug}`;
+const productUrl = getLocalizedUrl(productPath, locale);
+
+const formattedPrice = new Intl.NumberFormat(locale === 'sr' ? 'sr-RS' : 'en-US', {
+  style: 'currency',
+  currency: product.currency,
+  minimumFractionDigits: 0,
+  maximumFractionDigits: 0
+}).format(product.price);
+---
+
+<article class="product-card" itemscope itemtype="https://schema.org/Product">
+  <a href={productUrl} class="product-link">
+    <div class="product-image-wrapper">
+      {primaryImage && (
+        <img 
+          src={primaryImage.url} 
+          alt={imageAlt}
+          class="product-image"
+          loading="lazy"
+          width="300"
+          height="300"
+          itemprop="image"
+        />
+      )}
+      {product.featured && (
+        <span class="product-badge">
+          {locale === 'sr' ? 'Izdvojeno' : 'Featured'}
+        </span>
+      )}
+      {!product.inStock && (
+        <span class="product-badge out-of-stock">
+          {t('product.outOfStock')}
+        </span>
+      )}
+    </div>
+
+    <div class="product-info">
+      <h3 class="product-name" itemprop="name">{name}</h3>
+      
+      {shortDesc && (
+        <p class="product-description" itemprop="description">{shortDesc}</p>
+      )}
+
+      <div class="product-footer">
+        <div class="product-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+          <span class="price-label">{t('product.price')}:</span>
+          <span class="price-value" itemprop="price" content={product.price.toString()}>
+            {formattedPrice}
+          </span>
+          <meta itemprop="priceCurrency" content={product.currency} />
+          <link itemprop="availability" href={product.inStock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock'} />
+        </div>
+
+        <span class="product-cta">
+          {t('product.viewDetails')} →
+        </span>
+      </div>
+
+      <meta itemprop="sku" content={product.sku} />
+    </div>
+  </a>
+</article>
+
+<style>
+  .product-card {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .product-card:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    transform: translateY(-2px);
+    border-color: #d1d5db;
+  }
+
+  .product-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .product-image-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 100%; /* 1:1 Aspect Ratio */
+    background-color: #f9fafb;
+    overflow: hidden;
+  }
+
+  .product-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .product-card:hover .product-image {
+    transform: scale(1.05);
+  }
+
+  .product-badge {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background-color: #0066cc;
+    color: #ffffff;
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+  }
+
+  .product-badge.out-of-stock {
+    background-color: #dc2626;
+  }
+
+  .product-info {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    flex: 1;
+  }
+
+  .product-name {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #111827;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .product-description {
+    color: #6b7280;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin: 0;
+    flex: 1;
+  }
+
+  .product-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 0.75rem;
+    border-top: 1px solid #f3f4f6;
+  }
+
+  .product-price {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  .price-label {
+    font-size: 0.75rem;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+  }
+
+  .price-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0066cc;
+  }
+
+  .product-cta {
+    color: #0066cc;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: transform 0.2s ease;
+  }
+
+  .product-card:hover .product-cta {
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 768px) {
+    .product-name {
+      font-size: 1rem;
+    }
+
+    .product-info {
+      padding: 1rem;
+    }
+
+    .price-value {
+      font-size: 1.125rem;
+    }
+  }
+</style>

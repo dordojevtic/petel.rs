@@ -1,32 +1,32 @@
 ---
-import type { Product } from '../types/product';
-import BaseLayout from '../layouts/BaseLayout.astro';
-import ProductGrid from '../components/products/ProductGrid.astro';
-import rawProductsData from '../data/products.json';
+import type { Product } from '../../types/product';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProductGrid from '../../components/products/ProductGrid.astro';
+import rawProductsData from '../../data/products.json';
 
-const locale = 'sr';
+const locale = 'en';
 const products = rawProductsData as unknown as Product[];
 const featuredProducts = products.filter(p => p.featured);
 ---
 
 <BaseLayout
-  title="Petel - Niskonaponska Oprema i Električni Materijal"
-  description="Petel je vodeći dobavljač visokokvalitetne niskonaponske opreme. Nudimo širok asortiman LED rasvete, prekidača, kablova i automatike za sve vaše električne potrebe."
-  keywords={['niskonaponska oprema', 'električni materijal', 'led rasveta', 'prekidači', 'kablovi', 'razvodne table', 'automatika', 'petel']}
+  title="Petel - Low-Voltage Equipment and Electrical Materials"
+  description="Petel is a leading supplier of high-quality low-voltage equipment. We offer a wide range of LED lighting, switches, cables, and automation for all your electrical needs."
+  keywords={['low-voltage equipment', 'electrical materials', 'led lighting', 'switches', 'cables', 'distribution boards', 'automation', 'petel']}
   locale={locale}
 >
   <!-- Hero Section -->
   <section class="hero">
     <div class="container">
       <div class="hero-content">
-        <h1 class="hero-title">Dobrodošli u Petel</h1>
+        <h1 class="hero-title">Welcome to Petel</h1>
         <p class="hero-description">
-          Vaš pouzdan partner za visokokvalitetnu niskonaponsku opremu i električni materijal.
-          Nudimo kompletan asortiman proizvoda za stambene, komercijalne i industrijske objekte.
+          Your trusted partner for high-quality low-voltage equipment and electrical materials.
+          We offer a complete range of products for residential, commercial, and industrial facilities.
         </p>
         <div class="hero-actions">
-          <a href="/proizvodi" class="btn btn-primary">Pogledaj proizvode</a>
-          <a href="/kontakt" class="btn btn-secondary">Kontaktiraj nas</a>
+          <a href="/en/products" class="btn btn-primary">View Products</a>
+          <a href="/en/contact" class="btn btn-secondary">Contact Us</a>
         </div>
       </div>
     </div>
@@ -35,15 +35,15 @@ const featuredProducts = products.filter(p => p.featured);
   <!-- Featured Products Section -->
   <section class="section">
     <div class="container">
-      <h2 class="section-title">Izdvojeni proizvodi</h2>
+      <h2 class="section-title">Featured Products</h2>
       <p class="section-description">
-        Pogledajte naše najpopularnije i najkvalitetnije proizvode
+        Check out our most popular and highest quality products
       </p>
       <ProductGrid products={featuredProducts} locale={locale} showEmpty={false} />
       
       {featuredProducts.length > 0 && (
         <div style="text-align: center; margin-top: 2rem;">
-          <a href="/proizvodi" class="btn btn-primary">Svi proizvodi</a>
+          <a href="/en/products" class="btn btn-primary">All Products</a>
         </div>
       )}
     </div>
@@ -52,7 +52,7 @@ const featuredProducts = products.filter(p => p.featured);
   <!-- Features Section -->
   <section class="section features-section">
     <div class="container">
-      <h2 class="section-title">Zašto izabrati Petel?</h2>
+      <h2 class="section-title">Why Choose Petel?</h2>
       <div class="features-grid">
         <div class="feature-card">
           <div class="feature-icon">
@@ -60,9 +60,9 @@ const featuredProducts = products.filter(p => p.featured);
               <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
             </svg>
           </div>
-          <h3 class="feature-title">Konkurentne cene</h3>
+          <h3 class="feature-title">Competitive Prices</h3>
           <p class="feature-description">
-            Nudimo najbolji odnos cene i kvaliteta na tržištu
+            We offer the best price-quality ratio on the market
           </p>
         </div>
 
@@ -72,9 +72,9 @@ const featuredProducts = products.filter(p => p.featured);
               <polyline points="20 6 9 17 4 12"></polyline>
             </svg>
           </div>
-          <h3 class="feature-title">Vrhunski kvalitet</h3>
+          <h3 class="feature-title">Premium Quality</h3>
           <p class="feature-description">
-            Svi proizvodi su sertifikovani i proverenog kvaliteta
+            All products are certified and of proven quality
           </p>
         </div>
 
@@ -85,9 +85,9 @@ const featuredProducts = products.filter(p => p.featured);
               <circle cx="12" cy="10" r="3"></circle>
             </svg>
           </div>
-          <h3 class="feature-title">Brza dostava</h3>
+          <h3 class="feature-title">Fast Delivery</h3>
           <p class="feature-description">
-            Efikasna dostava širom Srbije u najkraćem roku
+            Efficient delivery throughout Serbia in the shortest time
           </p>
         </div>
 
@@ -100,9 +100,9 @@ const featuredProducts = products.filter(p => p.featured);
               <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
             </svg>
           </div>
-          <h3 class="feature-title">Stručna podrška</h3>
+          <h3 class="feature-title">Expert Support</h3>
           <p class="feature-description">
-            Tim stručnjaka spreman da vam pomogne u izboru
+            Team of experts ready to help you choose
           </p>
         </div>
       </div>
@@ -112,27 +112,27 @@ const featuredProducts = products.filter(p => p.featured);
   <!-- Categories Section -->
   <section class="section">
     <div class="container">
-      <h2 class="section-title">Kategorije proizvoda</h2>
+      <h2 class="section-title">Product Categories</h2>
       <div class="categories-grid">
-        <a href="/proizvodi?category=led-rasveta" class="category-card">
-          <h3>LED Rasveta</h3>
-          <p>Energetski efikasna rasveta za sve potrebe</p>
+        <a href="/en/products?category=led-lighting" class="category-card">
+          <h3>LED Lighting</h3>
+          <p>Energy-efficient lighting for all needs</p>
         </a>
-        <a href="/proizvodi?category=prekidaci-i-uticnice" class="category-card">
-          <h3>Prekidači i Utičnice</h3>
-          <p>Kvalitetni prekidači i utičnice za vaš dom</p>
+        <a href="/en/products?category=switches-and-sockets" class="category-card">
+          <h3>Switches and Sockets</h3>
+          <p>Quality switches and sockets for your home</p>
         </a>
-        <a href="/proizvodi?category=kablovi-i-provodnici" class="category-card">
-          <h3>Kablovi i Provodnici</h3>
-          <p>Širok asortiman kablova i provodnika</p>
+        <a href="/en/products?category=cables-and-wires" class="category-card">
+          <h3>Cables and Wires</h3>
+          <p>Wide range of cables and wires</p>
         </a>
-        <a href="/proizvodi?category=razvodne-table" class="category-card">
-          <h3>Razvodne Table</h3>
-          <p>Razvodne table i oprema za distribuciju</p>
+        <a href="/en/products?category=distribution-boards" class="category-card">
+          <h3>Distribution Boards</h3>
+          <p>Distribution boards and equipment</p>
         </a>
-        <a href="/proizvodi?category=automatika" class="category-card">
-          <h3>Automatika</h3>
-          <p>Oprema za automatizaciju i kontrolu</p>
+        <a href="/en/products?category=automation" class="category-card">
+          <h3>Automation</h3>
+          <p>Automation and control equipment</p>
         </a>
       </div>
     </div>

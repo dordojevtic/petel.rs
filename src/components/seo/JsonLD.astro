@@ -1,0 +1,79 @@
+---
+import type { Product } from '../../types/product';
+import type { Locale } from '../../types/i18n';
+import { getLocalizedField } from '../../i18n/utils';
+
+interface Props {
+  type: 'product' | 'organization' | 'breadcrumb';
+  product?: Product;
+  locale?: Locale;
+  breadcrumbs?: { name: string; url: string }[];
+}
+
+const { type, product, locale = 'sr', breadcrumbs } = Astro.props;
+const siteUrl = 'https://petel.rs';
+
+let jsonLD: Record<string, any> = {};
+
+if (type === 'organization') {
+  jsonLD = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Petel',
+    url: siteUrl,
+    logo: `${siteUrl}/images/petel-logo.jpg`,
+    description: locale === 'sr' 
+      ? 'Petel - Vodeći dobavljač visokokvalitetne niskonaponske opreme'
+      : 'Petel - Leading supplier of high-quality low-voltage equipment',
+    address: {
+      '@type': 'PostalAddress',
+      addressCountry: 'RS',
+      addressLocality: locale === 'sr' ? 'Beograd' : 'Belgrade'
+    },
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'customer service',
+      availableLanguage: ['Serbian', 'English']
+    }
+  };
+}
+
+if (type === 'product' && product) {
+  const name = getLocalizedField(product, 'name', locale);
+  const description = getLocalizedField(product, 'description', locale);
+  const image = product.images.find(img => img.isPrimary)?.url || product.images[0]?.url;
+  
+  jsonLD = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: name,
+    description: description,
+    image: image ? `${siteUrl}${image}` : undefined,
+    sku: product.sku,
+    offers: {
+      '@type': 'Offer',
+      price: product.price,
+      priceCurrency: product.currency,
+      availability: product.inStock 
+        ? 'https://schema.org/InStock' 
+        : 'https://schema.org/OutOfStock',
+      url: Astro.url.href
+    }
+  };
+}
+
+if (type === 'breadcrumb' && breadcrumbs && breadcrumbs.length > 0) {
+  jsonLD = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbs.map((crumb, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: crumb.name,
+      item: `${siteUrl}${crumb.url}`
+    }))
+  };
+}
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLD)} />

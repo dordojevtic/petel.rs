@@ -1,0 +1,84 @@
+---
+import type { Locale } from '../../types/i18n';
+
+interface Props {
+  title: string;
+  description: string;
+  keywords?: string[];
+  image?: string;
+  locale: Locale;
+  alternateUrls: { locale: Locale; url: string }[];
+  canonicalUrl: string;
+  jsonLD?: Record<string, any>;
+}
+
+const {
+  title,
+  description,
+  keywords = [],
+  image = '/images/petel-og-image.jpg',
+  locale,
+  alternateUrls,
+  canonicalUrl,
+  jsonLD
+} = Astro.props;
+
+const siteUrl = 'https://petel.rs';
+const fullImageUrl = image.startsWith('http') ? image : `${siteUrl}${image}`;
+
+// Get Serbian and English URLs for hreflang
+const serbianUrl = alternateUrls.find(u => u.locale === 'sr')?.url || canonicalUrl;
+const englishUrl = alternateUrls.find(u => u.locale === 'en')?.url || canonicalUrl;
+
+// Language code mapping
+const langCode = locale === 'sr' ? 'sr-RS' : 'en-US';
+---
+
+<!-- Primary Meta Tags -->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content={description} />
+<meta name="keywords" content={keywords.join(', ')} />
+<meta name="generator" content={Astro.generator} />
+<meta name="language" content={langCode} />
+
+<!-- Canonical URL -->
+<link rel="canonical" href={canonicalUrl} />
+
+<!-- hreflang Tags for Bilingual SEO -->
+<link rel="alternate" hreflang="sr" href={serbianUrl} />
+<link rel="alternate" hreflang="sr-RS" href={serbianUrl} />
+<link rel="alternate" hreflang="en" href={englishUrl} />
+<link rel="alternate" hreflang="en-US" href={englishUrl} />
+<link rel="alternate" hreflang="x-default" href={serbianUrl} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={fullImageUrl} />
+<meta property="og:locale" content={langCode} />
+<meta property="og:site_name" content="Petel" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={canonicalUrl} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={fullImageUrl} />
+
+<!-- Favicons -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+<!-- Theme Color -->
+<meta name="theme-color" content="#FFFFFF" />
+
+<!-- JSON-LD Structured Data -->
+{jsonLD && (
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLD)} />
+)}
+
+<title>{title}</title>

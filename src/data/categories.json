@@ -1,0 +1,47 @@
+[
+  {
+    "id": "led-lighting",
+    "slug_sr": "led-rasveta",
+    "slug_en": "led-lighting",
+    "name_sr": "LED Rasveta",
+    "name_en": "LED Lighting",
+    "description_sr": "Energetski efikasna LED rasveta za sve potrebe",
+    "description_en": "Energy-efficient LED lighting for all needs"
+  },
+  {
+    "id": "switches-sockets",
+    "slug_sr": "prekidaci-i-uticnice",
+    "slug_en": "switches-and-sockets",
+    "name_sr": "Prekidači i Utičnice",
+    "name_en": "Switches and Sockets",
+    "description_sr": "Kvalitetni prekidači i utičnice za vaš dom",
+    "description_en": "Quality switches and sockets for your home"
+  },
+  {
+    "id": "cables-wires",
+    "slug_sr": "kablovi-i-provodnici",
+    "slug_en": "cables-and-wires",
+    "name_sr": "Kablovi i Provodnici",
+    "name_en": "Cables and Wires",
+    "description_sr": "Širok asortiman kablova i provodnika",
+    "description_en": "Wide range of cables and wires"
+  },
+  {
+    "id": "distribution-boards",
+    "slug_sr": "razvodne-table",
+    "slug_en": "distribution-boards",
+    "name_sr": "Razvodne Table",
+    "name_en": "Distribution Boards",
+    "description_sr": "Razvodne table i oprema za distribuciju električne energije",
+    "description_en": "Distribution boards and electrical distribution equipment"
+  },
+  {
+    "id": "automation",
+    "slug_sr": "automatika",
+    "slug_en": "automation",
+    "name_sr": "Automatika",
+    "name_en": "Automation",
+    "description_sr": "Oprema za automatizaciju i kontrolu",
+    "description_en": "Automation and control equipment"
+  }
+]

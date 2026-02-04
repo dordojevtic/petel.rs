@@ -1,0 +1,169 @@
+---
+import type { Locale } from '../../types/i18n';
+import { languages } from '../../i18n/config';
+import { getAlternateUrl, stripLocaleFromPath } from '../../i18n/utils';
+
+interface Props {
+  locale: Locale;
+  currentPath: string;
+}
+
+const { locale, currentPath } = Astro.props;
+
+// Get the base path without locale
+const basePath = stripLocaleFromPath(currentPath);
+
+// Generate alternate URLs
+const alternateLocale: Locale = locale === 'sr' ? 'en' : 'sr';
+const alternateUrl = getAlternateUrl(currentPath, alternateLocale);
+---
+
+<div class="language-switcher">
+  <button 
+    class="lang-button" 
+    aria-label={`Switch to ${languages[alternateLocale]}`}
+    data-current-locale={locale}
+    data-alternate-url={alternateUrl}
+  >
+    <span class="lang-current">{locale.toUpperCase()}</span>
+    <svg 
+      class="lang-icon" 
+      xmlns="http://www.w3.org/2000/svg" 
+      width="16" 
+      height="16" 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke="currentColor" 
+      stroke-width="2" 
+      stroke-linecap="round" 
+      stroke-linejoin="round"
+    >
+      <circle cx="12" cy="12" r="10"></circle>
+      <line x1="2" y1="12" x2="22" y2="12"></line>
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+    </svg>
+  </button>
+
+  <div class="lang-dropdown">
+    <a 
+      href={locale === 'sr' ? basePath || '/' : `/en${basePath || '/'}`}
+      class:list={['lang-option', { active: locale === 'sr' }]}
+      hreflang="sr"
+    >
+      <span class="lang-code">SR</span>
+      <span class="lang-name">Srpski</span>
+    </a>
+    <a 
+      href={locale === 'en' ? basePath || '/' : `/en${basePath || '/'}`}
+      class:list={['lang-option', { active: locale === 'en' }]}
+      hreflang="en"
+    >
+      <span class="lang-code">EN</span>
+      <span class="lang-name">English</span>
+    </a>
+  </div>
+</div>
+
+<style>
+  .language-switcher {
+    position: relative;
+    display: inline-block;
+  }
+
+  .lang-button {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.5rem 0.75rem;
+    background-color: #f3f4f6;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    font-weight: 500;
+    color: #374151;
+    transition: all 0.2s ease;
+  }
+
+  .lang-button:hover {
+    background-color: #e5e7eb;
+    border-color: #d1d5db;
+  }
+
+  .lang-current {
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .lang-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .lang-dropdown {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.375rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    min-width: 150px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: all 0.2s ease;
+    z-index: 50;
+  }
+
+  .language-switcher:hover .lang-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .lang-option {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    color: #374151;
+    transition: background-color 0.2s ease;
+  }
+
+  .lang-option:hover {
+    background-color: #f3f4f6;
+  }
+
+  .lang-option.active {
+    background-color: #eff6ff;
+    color: #0066cc;
+  }
+
+  .lang-option:first-child {
+    border-radius: 0.375rem 0.375rem 0 0;
+  }
+
+  .lang-option:last-child {
+    border-radius: 0 0 0.375rem 0.375rem;
+  }
+
+  .lang-code {
+    font-weight: 600;
+    font-size: 0.875rem;
+  }
+
+  .lang-name {
+    font-size: 0.875rem;
+  }
+
+  @media (max-width: 768px) {
+    .lang-button {
+      padding: 0.375rem 0.625rem;
+    }
+
+    .lang-current {
+      font-size: 0.8125rem;
+    }
+  }
+</style>

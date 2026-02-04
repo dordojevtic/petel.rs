@@ -1,0 +1,203 @@
+---
+import type { Locale } from '../../types/i18n';
+import { useTranslations } from '../../i18n/config';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<div class="product-search" id="product-search">
+  <div class="search-input-wrapper">
+    <svg 
+      class="search-icon" 
+      xmlns="http://www.w3.org/2000/svg" 
+      width="20" 
+      height="20" 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke="currentColor" 
+      stroke-width="2" 
+      stroke-linecap="round" 
+      stroke-linejoin="round"
+    >
+      <circle cx="11" cy="11" r="8"></circle>
+      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    </svg>
+    <input 
+      type="text" 
+      id="search-input"
+      class="search-input" 
+      placeholder={t('search.placeholder')}
+      aria-label={t('search.placeholder')}
+    />
+    <button 
+      id="clear-search" 
+      class="clear-button" 
+      aria-label="Clear search"
+      style="display: none;"
+    >
+      ✕
+    </button>
+  </div>
+  <div id="search-results-count" class="search-results-count"></div>
+</div>
+
+<script>
+  import Fuse from 'fuse.js';
+
+  // Get all product cards
+  const productCards = document.querySelectorAll('.product-card');
+  const searchInput = document.getElementById('search-input') as HTMLInputElement;
+  const clearButton = document.getElementById('clear-search') as HTMLButtonElement;
+  const resultsCount = document.getElementById('search-results-count') as HTMLDivElement;
+
+  if (searchInput && productCards.length > 0) {
+    // Build searchable data from product cards
+    const searchData = Array.from(productCards).map((card, index) => {
+      const name = card.querySelector('.product-name')?.textContent || '';
+      const description = card.querySelector('.product-description')?.textContent || '';
+      return {
+        index,
+        name,
+        description,
+        element: card as HTMLElement
+      };
+    });
+
+    // Initialize Fuse.js
+    const fuse = new Fuse(searchData, {
+      keys: ['name', 'description'],
+      threshold: 0.3,
+      includeScore: true
+    });
+
+    let allVisible = true;
+
+    function updateSearch() {
+      const query = searchInput.value.trim();
+
+      if (query === '') {
+        // Show all products
+        searchData.forEach(item => {
+          item.element.style.display = '';
+        });
+        clearButton.style.display = 'none';
+        resultsCount.textContent = '';
+        allVisible = true;
+      } else {
+        // Search and filter
+        const results = fuse.search(query);
+        const matchedIndices = new Set(results.map(r => r.item.index));
+
+        searchData.forEach((item, index) => {
+          if (matchedIndices.has(index)) {
+            item.element.style.display = '';
+          } else {
+            item.element.style.display = 'none';
+          }
+        });
+
+        clearButton.style.display = 'flex';
+        
+        const locale = document.documentElement.lang === 'sr' ? 'sr' : 'en';
+        const resultText = locale === 'sr' 
+          ? `${results.length} ${results.length === 1 ? 'rezultat' : 'rezultata'}`
+          : `${results.length} ${results.length === 1 ? 'result' : 'results'}`;
+        
+        resultsCount.textContent = resultText;
+        allVisible = false;
+      }
+    }
+
+    // Event listeners
+    searchInput.addEventListener('input', updateSearch);
+    
+    clearButton.addEventListener('click', () => {
+      searchInput.value = '';
+      updateSearch();
+      searchInput.focus();
+    });
+
+    // Clear search on Escape key
+    searchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        searchInput.value = '';
+        updateSearch();
+      }
+    });
+  }
+</script>
+
+<style>
+  .product-search {
+    margin-bottom: 2rem;
+  }
+
+  .search-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    max-width: 500px;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 1rem;
+    color: #6b7280;
+    pointer-events: none;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 0.75rem 3rem 0.75rem 3rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all 0.2s ease;
+  }
+
+  .search-input:focus {
+    outline: none;
+    border-color: #0066cc;
+    box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+  }
+
+  .clear-button {
+    position: absolute;
+    right: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background-color: #e5e7eb;
+    border: none;
+    border-radius: 50%;
+    color: #6b7280;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.875rem;
+  }
+
+  .clear-button:hover {
+    background-color: #d1d5db;
+    color: #374151;
+  }
+
+  .search-results-count {
+    margin-top: 0.75rem;
+    color: #6b7280;
+    font-size: 0.875rem;
+  }
+
+  @media (max-width: 768px) {
+    .search-input-wrapper {
+      max-width: 100%;
+    }
+  }
+</style>

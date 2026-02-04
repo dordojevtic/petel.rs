@@ -1,0 +1,328 @@
+---
+import type { GetStaticPaths } from 'astro';
+import type { Product } from '../../../types/product';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import JsonLD from '../../../components/seo/JsonLD.astro';
+import rawProductsData from '../../../data/products.json';
+import { getLocalizedField } from '../../../i18n/utils';
+
+export const getStaticPaths = (() => {
+  const products = rawProductsData as unknown as Product[];
+  return products.map((product) => ({
+    params: { slug: product.slug_en },
+    props: { product }
+  }));
+}) satisfies GetStaticPaths;
+
+const { product } = Astro.props;
+const locale = 'en';
+
+const name = getLocalizedField(product, 'name', locale);
+const description = getLocalizedField(product, 'description', locale);
+const metaDescription = getLocalizedField(product, 'meta_description', locale);
+const primaryImage = product.images.find(img => img.isPrimary) || product.images[0];
+
+const formattedPrice = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: product.currency,
+  minimumFractionDigits: 0,
+  maximumFractionDigits: 0
+}).format(product.price);
+---
+
+<BaseLayout
+  title={`${name} - Petel`}
+  description={metaDescription || description}
+  keywords={product.keywords_en}
+  image={primaryImage?.url}
+  locale={locale}
+>
+  <JsonLD type="product" product={product} locale={locale} />
+  
+  <section class="section">
+    <div class="container">
+      <!-- Breadcrumbs -->
+      <nav class="breadcrumbs">
+        <a href="/en">Home</a>
+        <span class="separator">›</span>
+        <a href="/en/products">Products</a>
+        <span class="separator">›</span>
+        <span class="current">{name}</span>
+      </nav>
+
+      <div class="product-detail">
+        <!-- Product Images -->
+        <div class="product-images">
+          <div class="main-image">
+            {primaryImage && (
+              <img 
+                src={primaryImage.url} 
+                alt={primaryImage.alt_en}
+                width="600"
+                height="600"
+              />
+            )}
+            {!product.inStock && (
+              <span class="out-of-stock-badge">Out of Stock</span>
+            )}
+          </div>
+          
+          {product.images.length > 1 && (
+            <div class="image-thumbnails">
+              {product.images.map((image) => (
+                <img 
+                  src={image.url} 
+                  alt={image.alt_en}
+                  class:list={['thumbnail', { active: image.isPrimary }]}
+                  width="100"
+                  height="100"
+                />
+              ))}
+            </div>
+          )}
+        </div>
+
+        <!-- Product Info -->
+        <div class="product-info">
+          <h1 class="product-name">{name}</h1>
+          
+          <div class="product-meta">
+            <span class="product-sku">SKU: {product.sku}</span>
+            <span class:list={['product-stock', { 'in-stock': product.inStock }]}>
+              {product.inStock ? '✓ In Stock' : '✗ Out of Stock'}
+            </span>
+          </div>
+
+          <div class="product-price">
+            <span class="price-value">{formattedPrice}</span>
+          </div>
+
+          <div class="product-description">
+            <p>{description}</p>
+          </div>
+
+          {product.specifications.length > 0 && (
+            <div class="product-specifications">
+              <h2>Specifications</h2>
+              <table class="specs-table">
+                <tbody>
+                  {product.specifications.map((spec) => (
+                    <tr>
+                      <td class="spec-key">{spec.key_en}</td>
+                      <td class="spec-value">{spec.value_en}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+
+          <div class="product-actions">
+            <a href="/en/contact" class="btn btn-primary">Contact Us to Purchase</a>
+            <a href="/en/products" class="btn btn-secondary">Back to Products</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    font-size: 0.875rem;
+    color: #6b7280;
+  }
+
+  .breadcrumbs a {
+    color: #0066cc;
+    text-decoration: none;
+  }
+
+  .breadcrumbs a:hover {
+    text-decoration: underline;
+  }
+
+  .breadcrumbs .separator {
+    color: #d1d5db;
+  }
+
+  .breadcrumbs .current {
+    color: #374151;
+  }
+
+  .product-detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+
+  .product-images {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .main-image {
+    position: relative;
+    width: 100%;
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    aspect-ratio: 1;
+  }
+
+  .main-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .out-of-stock-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: #dc2626;
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+  }
+
+  .image-thumbnails {
+    display: flex;
+    gap: 0.75rem;
+    overflow-x: auto;
+  }
+
+  .thumbnail {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border: 2px solid #e5e7eb;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+  }
+
+  .thumbnail:hover,
+  .thumbnail.active {
+    border-color: #0066cc;
+  }
+
+  .product-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .product-name {
+    font-size: 2rem;
+    margin: 0;
+  }
+
+  .product-meta {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    font-size: 0.875rem;
+  }
+
+  .product-sku {
+    color: #6b7280;
+  }
+
+  .product-stock {
+    color: #dc2626;
+    font-weight: 600;
+  }
+
+  .product-stock.in-stock {
+    color: #059669;
+  }
+
+  .product-price {
+    padding: 1.5rem;
+    background-color: #f9fafb;
+    border-radius: 0.5rem;
+  }
+
+  .price-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #0066cc;
+  }
+
+  .product-description {
+    line-height: 1.7;
+    color: #374151;
+  }
+
+  .product-specifications {
+    border-top: 1px solid #e5e7eb;
+    padding-top: 1.5rem;
+  }
+
+  .product-specifications h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .specs-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .specs-table tr {
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .specs-table td {
+    padding: 0.75rem 0;
+  }
+
+  .spec-key {
+    font-weight: 600;
+    color: #374151;
+    width: 40%;
+  }
+
+  .spec-value {
+    color: #6b7280;
+  }
+
+  .product-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    .product-detail {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .product-name {
+      font-size: 1.5rem;
+    }
+
+    .price-value {
+      font-size: 2rem;
+    }
+
+    .product-actions {
+      flex-direction: column;
+    }
+
+    .product-actions .btn {
+      width: 100%;
+    }
+  }
+</style>

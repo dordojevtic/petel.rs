@@ -1,0 +1,179 @@
+---
+import type { Product } from '../../types/product';
+import type { Category } from '../../types/product';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProductGrid from '../../components/products/ProductGrid.astro';
+import ProductSearch from '../../components/products/ProductSearch.astro';
+import rawProductsData from '../../data/products.json';
+import rawCategoriesData from '../../data/categories.json';
+
+const locale = 'sr';
+const products = rawProductsData as unknown as Product[];
+const categories = rawCategoriesData as unknown as Category[];
+
+// Get category filter from URL
+const categoryParam = Astro.url.searchParams.get('category');
+const filteredProducts = categoryParam
+  ? products.filter(p => p.category === categoryParam)
+  : products;
+
+// Find current category info
+const currentCategory = categoryParam 
+  ? categories.find(c => c.slug_sr === categoryParam)
+  : null;
+
+const pageTitle = currentCategory 
+  ? `${currentCategory.name_sr} - Proizvodi` 
+  : 'Svi Proizvodi';
+
+const pageDescription = currentCategory
+  ? currentCategory.description_sr
+  : 'Pregledajte kompletan asortiman naših proizvoda - LED rasveta, prekidači, kablovi, razvodne table i automatika.';
+---
+
+<BaseLayout
+  title={`${pageTitle} - Petel`}
+  description={pageDescription}
+  keywords={['proizvodi', 'električni materijal', 'niskonaponska oprema', 'petel']}
+  locale={locale}
+>
+  <section class="section">
+    <div class="container">
+      <div class="page-header">
+        <h1 class="page-title">{pageTitle}</h1>
+        {currentCategory && (
+          <p class="page-description">{currentCategory.description_sr}</p>
+        )}
+      </div>
+
+      <!-- Category Filter -->
+      <div class="filter-section">
+        <h3>Kategorije</h3>
+        <div class="category-filters">
+          <a 
+            href="/proizvodi" 
+            class:list={['category-filter', { active: !categoryParam }]}
+          >
+            Sve kategorije
+          </a>
+          {categories.map((category) => (
+            <a 
+              href={`/proizvodi?category=${category.slug_sr}`}
+              class:list={['category-filter', { active: categoryParam === category.slug_sr }]}
+            >
+              {category.name_sr}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Search -->
+      <ProductSearch locale={locale} />
+
+      <!-- Products Grid -->
+      <div class="products-section">
+        <div class="products-header">
+          <p class="products-count">
+            {filteredProducts.length} {filteredProducts.length === 1 ? 'proizvod' : 'proizvoda'}
+          </p>
+        </div>
+        
+        <ProductGrid products={filteredProducts} locale={locale} />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .page-title {
+    margin-bottom: 1rem;
+  }
+
+  .page-description {
+    color: #6b7280;
+    font-size: 1.125rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .filter-section {
+    margin-bottom: 3rem;
+    padding: 1.5rem;
+    background-color: #f9fafb;
+    border-radius: 0.5rem;
+  }
+
+  .filter-section h3 {
+    font-size: 1.125rem;
+    margin-bottom: 1rem;
+  }
+
+  .category-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .category-filter {
+    padding: 0.5rem 1rem;
+    background-color: #ffffff;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    text-decoration: none;
+    color: #374151;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+
+  .category-filter:hover {
+    border-color: #0066cc;
+    color: #0066cc;
+  }
+
+  .category-filter.active {
+    background-color: #0066cc;
+    border-color: #0066cc;
+    color: #ffffff;
+  }
+
+  .products-section {
+    margin-top: 2rem;
+  }
+
+  .products-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .products-count {
+    color: #6b7280;
+    font-size: 0.875rem;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .page-header {
+      margin-bottom: 2rem;
+    }
+
+    .filter-section {
+      padding: 1rem;
+    }
+
+    .category-filters {
+      gap: 0.5rem;
+    }
+
+    .category-filter {
+      font-size: 0.8125rem;
+      padding: 0.375rem 0.75rem;
+    }
+  }
+</style>
